@@ -4,6 +4,7 @@ import Home from './src/components/screens/Home'
 import SearchResults from './src/components/screens/SearchResults';
 
 export default function App() {
+  console.log("lo que sea");
   return (
     <>
     <SearchResults />

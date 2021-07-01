@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect} from "react";
 import { View, Text, Image, StyleSheet} from 'react-native'
 import { Card } from 'react-native-elements'
+import index from "../../src/api/index";
+import { constant } from "async";
    
 const Results = () =>{
     return(
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "column",
         backgroundColor: "#1A1A1A",
-        textAlign:"Left",
+        textAlign:"left",
         fontSize: 20,
         color: "#FF5B00",
     },
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
         borderColor: "#FF5B00",
       },
     name: {
-        fontFamily: "Roboto",
+       // fontFamily: "Roboto",
         color: "white",
         fontSize: 20,
         fontWeight: "normal",
@@ -63,14 +65,14 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
     },
     name2:{
-        fontFamily: "Roboto",
+        //fontFamily: "Roboto",
         color: "#FF5B00",
         fontSize: 15,
         fontWeight: "normal",
         textAlign: "center",
     },
     song: {
-        fontFamily: "Roboto",
+        //fontFamily: "Roboto",
         color: "white",
         fontSize: 20,
         fontWeight: "normal",
