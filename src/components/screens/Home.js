@@ -25,14 +25,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   text: {
-    fontFamily: "Roboto",
+    //fontFamily: "Roboto",
     color: "white",
     fontSize: 42,
     fontWeight: "normal",
     textAlign: "center",
   },
   text2: {
-    fontFamily: "Roboto",
+    //fontFamily: "Roboto",
     color: "white",
     fontSize: 20,
     fontWeight: "normal",
