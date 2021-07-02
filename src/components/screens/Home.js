@@ -1,15 +1,18 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View, Image, Pressable} from "react-native";
+import { ImageBackground, StyleSheet, Text, View, TouchableOpacity, Image, Pressable} from "react-native";
 
-const Home = () => (
+const Home = ({ navigation }) => (
   <View style={styles.container}>
     <ImageBackground source={require('../screens/resources/background.jpg')} style={styles.background}>
       <Text style={styles.text}>Welcome to</Text>
       <Image style={styles.images} source={require('../screens/resources/logo.png')} />
       <Text style={styles.text}>Hörer</Text>
-      <Pressable style={styles.button}>
-        <Text style={styles.text2}>Press me</Text>
-      </Pressable>
+        <Pressable
+        style={styles.button} 
+        navigation={navigation}
+        onPress={()=>{navigation.navigate("SearchResults")}}>
+          <Image source={require("../screens/resources/search_icon.png")} style={styles.icon} />
+        </Pressable>
     </ImageBackground>
   </View>
 );
@@ -25,18 +28,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   text: {
-    //fontFamily: "Roboto",
+    fontFamily: "Roboto",
     color: "white",
     fontSize: 42,
     fontWeight: "normal",
     textAlign: "center",
   },
-  text2: {
-    //fontFamily: "Roboto",
-    color: "white",
-    fontSize: 20,
-    fontWeight: "normal",
-    textAlign: "center",
+  icon: {
+    width: 40,
+    height:40,
+    alignSelf: "center"
   },
   images:{
     alignSelf:"center",

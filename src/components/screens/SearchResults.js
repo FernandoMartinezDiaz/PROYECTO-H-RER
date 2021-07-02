@@ -27,7 +27,7 @@ const SearchResults = ({ navigation }) => {
       <Searchbar
         placeholder="Search any song or artist"
       />
-    <Results />
+    <Results navigation={navigation} />
     </View>
   );
 };

@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet} from 'react-native'
+import { View, Text, Image, StyleSheet, Pressable} from 'react-native'
 import { Card } from 'react-native-elements'
    
-const Songs = () =>{
+const Songs = ({ navigation }) =>{
     return(
         <Card containerStyle={styles.container}>
-            <Card.Title style={styles.container}>TOP SONGS</Card.Title>
-            <View style={styles.user}>
+            <Card.Title style={styles.title}>TOP SONGS</Card.Title>
+            <Pressable style={styles.user} onPress={()=>{navigation.navigate("Song")}}>
                         <Image
                                 style={styles.images}
                                 source={{
@@ -17,8 +17,20 @@ const Songs = () =>{
                             <Text style={styles.song}>Humble</Text>
                             <Text style={styles.name2}>Kendrick Lamar</Text>
                         </View>
-                </View>
+            </Pressable>
             <Card.Divider color= "transparent" />
+            <Pressable style={styles.user} onPress={()=>{navigation.navigate("Song")}}>
+                        <Image
+                                style={styles.images}
+                                source={{
+                                    uri: "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b0/a5/ad/b0a5ad8b-ff44-082b-e5af-b4563e358b47/00602567261193.rgb.jpg/400x400cc.jpg"
+                                }}
+                            />
+                        <View style={styles.text}>
+                            <Text style={styles.song}>Humble</Text>
+                            <Text style={styles.name2}>Kendrick Lamar</Text>
+                        </View>
+            </Pressable>
         </Card> 
     )
 }
@@ -31,10 +43,15 @@ const styles = StyleSheet.create({
         textAlign:"left",
         fontSize: 20,
         color: "#FF5B00",
-        borderColor: "transparent"
+        borderColor: "transparent",
+        borderWidth: 0
+    },
+    title:{
+        textAlign:"left",
+        fontSize: 20,
+        color: "#FF5B00",
     },
     user:{
-        flex: 1,
         flexDirection: 'row',
     },
     name: {
