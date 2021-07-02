@@ -19,18 +19,6 @@ const Songs = ({ navigation }) =>{
                         </View>
             </Pressable>
             <Card.Divider color= "transparent" />
-            <Pressable style={styles.user} onPress={()=>{navigation.navigate("Song")}}>
-                        <Image
-                                style={styles.images}
-                                source={{
-                                    uri: "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b0/a5/ad/b0a5ad8b-ff44-082b-e5af-b4563e358b47/00602567261193.rgb.jpg/400x400cc.jpg"
-                                }}
-                            />
-                        <View style={styles.text}>
-                            <Text style={styles.song}>Humble</Text>
-                            <Text style={styles.name2}>Kendrick Lamar</Text>
-                        </View>
-            </Pressable>
         </Card> 
     )
 }
