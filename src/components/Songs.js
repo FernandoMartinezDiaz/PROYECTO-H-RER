@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet} from 'react-native'
+import { View, Text, Image, StyleSheet, Pressable} from 'react-native'
 import { Card } from 'react-native-elements'
    
-const Songs = () =>{
+const Songs = ({ navigation }) =>{
     return(
         <Card containerStyle={styles.container}>
-            <Card.Title style={styles.container}>TOP SONGS</Card.Title>
-            <View style={styles.user}>
+            <Card.Title style={styles.title}>TOP SONGS</Card.Title>
+            <Pressable style={styles.user} onPress={()=>{navigation.navigate("Song")}}>
                         <Image
                                 style={styles.images}
                                 source={{
@@ -17,7 +17,7 @@ const Songs = () =>{
                             <Text style={styles.song}>Humble</Text>
                             <Text style={styles.name2}>Kendrick Lamar</Text>
                         </View>
-                </View>
+            </Pressable>
             <Card.Divider color= "transparent" />
         </Card> 
     )
@@ -31,10 +31,15 @@ const styles = StyleSheet.create({
         textAlign:"left",
         fontSize: 20,
         color: "#FF5B00",
-        borderColor: "transparent"
+        borderColor: "transparent",
+        borderWidth: 0
+    },
+    title:{
+        textAlign:"left",
+        fontSize: 20,
+        color: "#FF5B00",
     },
     user:{
-        flex: 1,
         flexDirection: 'row',
     },
     name: {
