@@ -4,24 +4,25 @@ import { Button, Searchbar } from "react-native-paper";
 import Results from "../Results";
 import index from "../../api/index";
 import { constant } from "async";
+import getEnvVars from "../../../Enviroment";
 
+const {apiUrl} = getEnvVars();
 
 const SearchResults = ({ navigation }) => {
   const [search, setSearch] = useState(null);
     const getSearch = async () => {
       try {
-        const respuesta = await index.get(`search?term=kiss the rain&locale=en-US&offset=0&limit=5`);
+        const respuesta = await index.get(`${apiUrl}search?term=kiss the rain&locale=en-US&offset=0&limit=5`);
         //setSearch (respuesta.tracks);
         console.log(respuesta.data.tracks);
-        console.log("promesa");
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     } 
     useEffect(()=>{
       getSearch ();
-        console.log("llamado de funcion");
     },[]);
+    
   return (
     <View style={styles.container}>
       <Searchbar
