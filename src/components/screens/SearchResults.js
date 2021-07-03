@@ -10,14 +10,14 @@ const SearchResults = ({ navigation }) => {
   const [search, setSearch] = useState(null);
     const getSearch = async () => {
       try {
-        const respuesta = await index.get('search?term=kiss the rain&locale=en-US&offset=0&limit=5');
+        const respuesta = await index.get(`search?term=kiss the rain&locale=en-US&offset=0&limit=5`);
         //setSearch (respuesta.tracks);
         console.log(respuesta.data.tracks);
         console.log("promesa");
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
-    }
+    } 
     useEffect(()=>{
       getSearch ();
         console.log("llamado de funcion");
