@@ -7,12 +7,12 @@ const Home = ({ navigation }) => (
       <Text style={styles.text}>Welcome to</Text>
       <Image style={styles.images} source={require('../screens/resources/logo.png')} />
       <Text style={styles.text}>Hörer</Text>
-        <Pressable
+        <TouchableOpacity
         style={styles.button} 
         navigation={navigation}
         onPress={()=>{navigation.navigate("SearchResults")}}>
           <Image source={require("../screens/resources/search_icon.png")} style={styles.icon} />
-        </Pressable>
+        </TouchableOpacity>
     </ImageBackground>
   </View>
 );

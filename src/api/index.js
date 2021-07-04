@@ -4,7 +4,7 @@ import getEnvVars from  "../../Enviroment"
 const { apiUrl } = getEnvVars();
 
 //Intancia de conexion
-const instance =axios.create( {
+const instance = axios.create( {
   method: 'get',
   url: apiUrl ,
   headers: { 

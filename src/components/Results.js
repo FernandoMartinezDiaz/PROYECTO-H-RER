@@ -5,35 +5,35 @@ import index from "../../src/api/index";
 import { constant } from "async";
 import { TouchableOpacity } from "react-native";
    
-const Results = ({navigation}) =>{
+const Results = ({navigation, title, subtitle, artist, song}) =>{
     return(
         <Card containerStyle={styles.container}>
             <Card.Title style={styles.title}>RESULTS</Card.Title> 
-                <Pressable style={styles.user} onPress={() =>{navigation.navigate("Artist")}}>
+                <TouchableOpacity style={styles.user} onPress={() =>{navigation.navigate("Artist")}}>
                         <Image
                                 style={styles.images}
                                 source={{
-                                    uri: "https://is3-ssl.mzstatic.com/image/thumb/Features115/v4/13/3d/89/133d89fd-9305-6eae-14ad-1668e0e5279d/mza_4449571582288811102.png/800x800cc.jpg"
+                                    uri: `${artist}`
                                 }}
                             />
                             <View>
-                                <Text style={styles.name}>Kendrick Lamar</Text>
+                                <Text style={styles.name}>{subtitle}</Text>
                             </View>
-                </Pressable>
+                </TouchableOpacity>
                 <Card.Divider color={"transparent"} />
                 <Card.Divider />
-            <Pressable style={styles.user2} onPress={()=>{navigation.navigate("Song")}}>
+            <TouchableOpacity style={styles.user2} onPress={()=>{navigation.navigate("Song")}}>
                         <Image
                                 style={styles.images2}
                                 source={{
-                                    uri: "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b0/a5/ad/b0a5ad8b-ff44-082b-e5af-b4563e358b47/00602567261193.rgb.jpg/400x400cc.jpg"
+                                    uri: `${song}`
                                 }}
                             />
                         <View style={styles.text}>
-                            <Text style={styles.song}>Humble</Text>
-                            <Text style={styles.name2}>Kendrick Lamar</Text>
+                            <Text style={styles.song}>{title}</Text>
+                            <Text style={styles.name2}>{subtitle}</Text>
                         </View>
-                </Pressable>
+                </TouchableOpacity>
         </Card> 
     )
 }

@@ -9,7 +9,6 @@ import Song from './src/components/screens/Song';
 const Stack = createStackNavigator();
 
 export default function App() {
-  console.log("lo que sea");
   return (
     <>
     <NavigationContainer theme={DarkTheme}>

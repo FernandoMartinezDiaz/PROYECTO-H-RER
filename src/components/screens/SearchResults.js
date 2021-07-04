@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { Button, Searchbar } from "react-native-paper";
 import Results from "../Results";
 import index from "../../api/index";
@@ -9,26 +9,37 @@ import getEnvVars from "../../../Enviroment";
 const {apiUrl} = getEnvVars();
 
 const SearchResults = ({ navigation }) => {
-  const [search, setSearch] = useState(null);
+  const [search, setSearch] = useState([]);
+
     const getSearch = async () => {
       try {
+        
         const respuesta = await index.get(`${apiUrl}search?term=kiss the rain&locale=en-US&offset=0&limit=5`);
-        //setSearch (respuesta.tracks);
-        console.log(respuesta.data.tracks);
+        setSearch (respuesta.data.tracks.hits);
+        console.log(respuesta.data.tracks.hits);
+
       } catch (error) {
-        console.log(error);
+        console.log(error);  
       }
     } 
     useEffect(()=>{
-      getSearch ();
+      getSearch();
     },[]);
     
   return (
     <View style={styles.container}>
-      <Searchbar
-        placeholder="Search any song or artist"
-      />
-    <Results navigation={navigation} />
+      <Searchbar placeholder="Search any song or artist"/>
+      {search.map(searchs => {
+    
+          return <Results 
+          key={searchs.track.key} 
+          navigation={navigation} 
+          title={searchs.track.title} 
+          subtitle={searchs.track.subtitle}
+          artist={searchs.track.images.background}
+          song={searchs.track.images.coverart}/>;
+
+      })}
     </View>
   );
 };
