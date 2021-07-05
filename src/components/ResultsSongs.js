@@ -1,38 +1,31 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native'
+import React, { useState, useEffect} from "react";
+import { View, Text, Image, StyleSheet, Pressable, SafeAreaView} from 'react-native'
 import { Card } from 'react-native-elements'
+import index from "../../src/api/index";
+import { constant } from "async";
+import { TouchableOpacity } from "react-native";
    
-const Songs = ({ navigation, title, subtitle, image }) =>{
+const ResultsSongs = ({navigation, name, artist, album}) =>{
     return(
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView>
             <TouchableOpacity style={styles.user} onPress={()=>{navigation.navigate("Song")}}>
                         <Image
                                 style={styles.images}
                                 source={{
-                                    uri: `${image}`
+                                    uri: `${album}`
                                 }}
                             />
                         <SafeAreaView style={styles.text}>
-                            <Text  style={styles.song}>{title}</Text>
-                            <Text  style={styles.name}>{subtitle}</Text>
+                            <Text style={styles.song}>{name}</Text>
+                            <Text style={styles.name}>{artist}</Text>
                         </SafeAreaView>
-            </TouchableOpacity>
-            <Card.Divider color= "transparent" />
+                </TouchableOpacity>
+                <Card.Divider />
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: "column",
-        backgroundColor: "transparent",
-        textAlign:"left",
-        fontSize: 20,
-        color: "#FF5B00",
-        borderColor: "transparent",
-        borderWidth: 0
-    },
     user:{
         flexDirection: 'row',
     },
@@ -46,11 +39,12 @@ const styles = StyleSheet.create({
     song: {
         fontFamily: "Roboto",
         color: "white",
-        fontSize: 17,
+        fontSize: 16,
         fontWeight: "normal",
         textAlign: "left",
+        paddingRight: 35,
         paddingTop:25,
-        flexShrink:1,
+        flexShrink:1
     },
     text: {
         flex:1,
@@ -61,8 +55,8 @@ const styles = StyleSheet.create({
         width:90,
         height:90,
         borderColor: "#FF5B00",
-        borderWidth: 1,
+        borderWidth: 2
       },
 });
 
-export default Songs;
+export default ResultsSongs;

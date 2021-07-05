@@ -1,22 +1,27 @@
 import React, { useState, useEffect} from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { Button, Searchbar } from "react-native-paper";
-import Results from "../Results";
+import { StyleSheet,ScrollView, SafeAreaView} from "react-native";
+import { Card } from 'react-native-elements'
+import { Searchbar } from "react-native-paper";
 import index from "../../api/index";
-import { constant } from "async";
 import getEnvVars from "../../../Enviroment";
+import ResultsArtist from "../ResultsArtist";
+import ResultsSongs from "../ResultsSongs";
 
 const {apiUrl} = getEnvVars();
 
 const SearchResults = ({ navigation }) => {
-  const [search, setSearch] = useState([]);
+  const [song, setSong] = useState([]);
+  const [artist, setArtist] = useState([]);
 
     const getSearch = async () => {
       try {
         
-        const respuesta = await index.get(`${apiUrl}search?term=kiss the rain&locale=en-US&offset=0&limit=5`);
-        setSearch (respuesta.data.tracks.hits);
+        const respuesta = await index.get(`${apiUrl}search?term=Aviators&locale=en-US&offset=0&limit=5`);
+        setSong (respuesta.data.tracks.hits);
+        setArtist(respuesta.data.artists.hits);
+
         console.log(respuesta.data.tracks.hits);
+        console.log(respuesta.data.artists.hits);
 
       } catch (error) {
         console.log(error);  
@@ -27,20 +32,36 @@ const SearchResults = ({ navigation }) => {
     },[]);
     
   return (
-    <View style={styles.container}>
-      <Searchbar placeholder="Search any song or artist"/>
-      {search.map(searchs => {
-    
-          return <Results 
-          key={searchs.track.key} 
-          navigation={navigation} 
-          title={searchs.track.title} 
-          subtitle={searchs.track.subtitle}
-          artist={searchs.track.images.background}
-          song={searchs.track.images.coverart}/>;
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <Searchbar 
+        placeholder="Search any song or artist"
+        onIconPress={()=> navigation.navigate("SearchResults")}/>
+        <Card containerStyle={styles.container}>
+          <Card.Title style={styles.title}>RESULTS</Card.Title> 
+          <Card.Title style={styles.subtitle}>Artist</Card.Title>
+          {artist.map(artists => {
+      
+            return <ResultsArtist
+            key={artists.artist.id} 
+            navigation={navigation} 
+            name={artists.artist.name} 
+            avatar={artists.artist.avatar}
+            id={artists.artist.id}/>;
+          })}
+          <Card.Title style={styles.subtitle}>Songs</Card.Title>
+          {song.map(songs =>{
 
-      })}
-    </View>
+            return <ResultsSongs
+            key={songs.track.key} 
+            navigation={navigation} 
+            name={songs.track.title} 
+            artist={songs.track.subtitle}
+            album={songs.track.images.coverart}/>;
+          })}
+        </Card>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -69,6 +90,16 @@ const styles = StyleSheet.create({
         fontWeight: "normal",
         textAlign: "center",
     },
+    title:{
+      textAlign:"center",
+      fontSize: 20,
+      color: "#FF5B00",
+    },
+    subtitle:{
+      textAlign:"left",
+      fontSize: 20,
+      color: "#FF5B00",
+    }
 });
 
 export default SearchResults;
