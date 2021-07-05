@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View, TouchableOpacity, Image, Pressable} from "react-native";
+import { ImageBackground, StyleSheet, Text, View, TouchableOpacity, Image} from "react-native";
 
 const Home = ({ navigation }) => (
   <View style={styles.container}>
@@ -10,7 +10,7 @@ const Home = ({ navigation }) => (
         <TouchableOpacity
         style={styles.button} 
         navigation={navigation}
-        onPress={()=>{navigation.navigate("SearchResults")}}>
+        onPress={()=>{navigation.navigate("SearchPage")}}>
           <Image source={require("../screens/resources/search_icon.png")} style={styles.icon} />
         </TouchableOpacity>
     </ImageBackground>

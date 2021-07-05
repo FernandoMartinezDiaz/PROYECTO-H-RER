@@ -1,14 +1,12 @@
-import React, { useState, useEffect} from "react";
-import { View, Text, Image, StyleSheet, Pressable, SafeAreaView} from 'react-native'
+import React from "react";
+import { Text, Image, StyleSheet, SafeAreaView} from 'react-native'
 import { Card } from 'react-native-elements'
-import index from "../../src/api/index";
-import { constant } from "async";
 import { TouchableOpacity } from "react-native";
    
 const ResultsSongs = ({navigation, name, artist, album}) =>{
     return(
         <SafeAreaView>
-            <TouchableOpacity style={styles.user} onPress={()=>{navigation.navigate("Song")}}>
+            <TouchableOpacity style={styles.user} onPress={()=>{navigation.navigate("Song", album)}}>
                         <Image
                                 style={styles.images}
                                 source={{
@@ -20,7 +18,7 @@ const ResultsSongs = ({navigation, name, artist, album}) =>{
                             <Text style={styles.name}>{artist}</Text>
                         </SafeAreaView>
                 </TouchableOpacity>
-                <Card.Divider />
+                <Card.Divider color="transparent"/>
         </SafeAreaView>
     )
 }

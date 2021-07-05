@@ -1,22 +1,50 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import { ImageBackground, StyleSheet, Text, View, Image} from "react-native";
+import index from "../../api/index";
 
-const Song = () => (
+import getEnvVars from "../../../Enviroment";
+
+const {apiUrl} = getEnvVars();
+
+const Song = ({route}) => {
+
+  const [song, setSong] = useState([]);
+  const [album, setAlbum] = useState([]);
+  const {image, id} = route.params
+
+    const getSong = async () => {
+      try {
+        
+        const respuesta = await index.get(`${apiUrl}songs/get-details?key=${id}&locale=en-US`);
+
+        setSong(respuesta.data);
+        setAlbum(respuesta.data.sections)
+        console.log(respuesta.data.sections);
+
+      } catch (error) {
+        console.log(error);  
+      }
+    } 
+    useEffect(()=>{
+      getSong();
+    },[]);
+
+  return(
   <View style={styles.container}>
     <ImageBackground source={{
-          uri: 'https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b0/a5/ad/b0a5ad8b-ff44-082b-e5af-b4563e358b47/00602567261193.rgb.jpg/400x400cc.jpg'
+          uri: `${image}`
           }} style={styles.background} blurRadius={15}>
           <Image source={{
-              uri: 'https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b0/a5/ad/b0a5ad8b-ff44-082b-e5af-b4563e358b47/00602567261193.rgb.jpg/400x400cc.jpg'
+              uri: `${image}`
           }} style={styles.images}/>
-      <Text style={styles.title}>HUMBLE.</Text>
-      <Text style={styles.text}>Kendrick Lamar</Text>
-      <Text style={styles.text}>DAMN. COLLECTORS EDITION</Text>
+      <Text style={styles.title}>{song.title}</Text>
+      <Text style={styles.text}>{song.subtitle}</Text>
       <Text style={styles.text}>2017</Text>
       <Text style={styles.text}>Hip-Hop/Rap</Text>
     </ImageBackground>
   </View>
-);
+  )
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -32,7 +60,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "Roboto",
     color: "white",
-    fontSize: 42,
+    fontSize: 40,
     fontWeight: "bold",
     textAlign: "center",
     textShadowColor: 'black',
@@ -41,7 +69,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "Roboto",
     color: "#FF5B00",
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: "normal",
     textAlign: "center",
   },

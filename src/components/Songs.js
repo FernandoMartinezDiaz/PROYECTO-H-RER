@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native'
 import { Card } from 'react-native-elements'
    
-const Songs = ({ navigation, title, subtitle, image }) =>{
+const Songs = ({ navigation, title, subtitle, image, id}) =>{
     return(
         <SafeAreaView style={styles.container}>
-            <TouchableOpacity style={styles.user} onPress={()=>{navigation.navigate("Song")}}>
+            <TouchableOpacity style={styles.user} onPress={()=>{navigation.navigate("Song", {image, id})}}>
                         <Image
                                 style={styles.images}
                                 source={{

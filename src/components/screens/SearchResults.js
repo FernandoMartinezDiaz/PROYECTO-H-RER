@@ -1,22 +1,29 @@
 import React, { useState, useEffect} from "react";
 import { StyleSheet,ScrollView, SafeAreaView} from "react-native";
 import { Card } from 'react-native-elements'
-import { Searchbar } from "react-native-paper";
 import index from "../../api/index";
 import getEnvVars from "../../../Enviroment";
 import ResultsArtist from "../ResultsArtist";
 import ResultsSongs from "../ResultsSongs";
+import Search from "../Search";
+import { ActivityIndicator, Title } from "react-native-paper";
 
 const {apiUrl} = getEnvVars();
 
-const SearchResults = ({ navigation }) => {
+const SearchResults = ({ route, navigation }) => {
+  const {search} = route.params
+
   const [song, setSong] = useState([]);
   const [artist, setArtist] = useState([]);
+  const [error, setError] = useState("");
 
     const getSearch = async () => {
       try {
-        
-        const respuesta = await index.get(`${apiUrl}search?term=Aviators&locale=en-US&offset=0&limit=5`);
+
+        const respuesta = await index.get(`${apiUrl}search?term=${search}&locale=en-US&offset=0&limit=5`);
+
+        if (!respuesta) setError("Try searching for a song or an artist")
+
         setSong (respuesta.data.tracks.hits);
         setArtist(respuesta.data.artists.hits);
 
@@ -34,21 +41,20 @@ const SearchResults = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <Searchbar 
-        placeholder="Search any song or artist"
-        onIconPress={()=> navigation.navigate("SearchResults")}/>
+        <Search navigation={navigation} />
         <Card containerStyle={styles.container}>
           <Card.Title style={styles.title}>RESULTS</Card.Title> 
           <Card.Title style={styles.subtitle}>Artist</Card.Title>
+          {artist && error ? <ActivityIndicator size="large" color=""/> : null }
           {artist.map(artists => {
-      
-            return <ResultsArtist
-            key={artists.artist.id} 
-            navigation={navigation} 
-            name={artists.artist.name} 
-            avatar={artists.artist.avatar}
-            id={artists.artist.id}/>;
-          })}
+              return <ResultsArtist
+              key={artists.artist.id} 
+              navigation={navigation} 
+              name={artists.artist.name} 
+              avatar={artists.artist.avatar}
+              id={artists.artist.id}/>;
+
+            })}
           <Card.Title style={styles.subtitle}>Songs</Card.Title>
           {song.map(songs =>{
 

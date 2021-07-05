@@ -19,7 +19,7 @@ const ResultsArtist = ({navigation, name, avatar, id}) =>{
                                 <Text style={styles.name}>{name}</Text>
                             </SafeAreaView>
                 </TouchableOpacity>
-                <Card.Divider />
+                <Card.Divider color="transparent"/>
         </SafeAreaView>
     )
 }

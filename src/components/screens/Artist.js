@@ -46,7 +46,8 @@ const Artist = ({navigation, route}) => {
                     key={songlist.key} 
                     title={songlist.title} 
                     subtitle={songlist.subtitle} 
-                    image={songlist.images.coverart}/>
+                    image={songlist.images.coverart}
+                    id={songlist.key}/>
 
                   })}
               </Card>
