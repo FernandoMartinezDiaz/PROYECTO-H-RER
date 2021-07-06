@@ -15,20 +15,18 @@ const SearchResults = ({ route, navigation }) => {
 
   const [song, setSong] = useState([]);
   const [artist, setArtist] = useState([]);
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
     const getSearch = async () => {
+      
       try {
 
         const respuesta = await index.get(`${apiUrl}search?term=${search}&locale=en-US&offset=0&limit=5`);
 
-        if (!respuesta) setError("Try searching for a song or an artist")
 
         setSong (respuesta.data.tracks.hits);
         setArtist(respuesta.data.artists.hits);
-
-        console.log(respuesta.data.tracks.hits);
-        console.log(respuesta.data.artists.hits);
+        setLoading(false);
 
       } catch (error) {
         console.log(error);  
@@ -45,7 +43,6 @@ const SearchResults = ({ route, navigation }) => {
         <Card containerStyle={styles.container}>
           <Card.Title style={styles.title}>RESULTS</Card.Title> 
           <Card.Title style={styles.subtitle}>Artist</Card.Title>
-          {artist && error ? <ActivityIndicator size="large" color="#FF5B00"/> : null }
           {artist.map(artists => {
               return <ResultsArtist
               key={artists.artist.id} 
