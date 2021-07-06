@@ -6,6 +6,7 @@ import SearchPage from './src/components/screens/SearchPage';
 import SearchResults from './src/components/screens/SearchResults';
 import Artist from './src/components/screens/Artist';
 import Song from './src/components/screens/Song';
+import Song1 from './src/components/screens/Song1';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,7 @@ export default function App() {
         <Stack.Screen name="SearchResults" component={SearchResults}/>
         <Stack.Screen name="Artist" component={Artist}/>
         <Stack.Screen name="Song" component={Song}/>
+        <Stack.Screen name="Song1" component={Song1} options={{ title: 'Song' }}/>
       </Stack.Navigator>
     </NavigationContainer>
   </>);

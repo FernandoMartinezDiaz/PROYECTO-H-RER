@@ -3,14 +3,14 @@ import { Text, Image, StyleSheet, SafeAreaView} from 'react-native'
 import { Card } from 'react-native-elements'
 import { TouchableOpacity } from "react-native";
    
-const ResultsSongs = ({navigation, name, artist, album}) =>{
+const ResultsSongs = ({navigation, name, artist, image2, id2}) =>{
     return(
         <SafeAreaView>
-            <TouchableOpacity style={styles.user} onPress={()=>{navigation.navigate("Song", album)}}>
+            <TouchableOpacity style={styles.user} onPress={()=>{navigation.navigate("Song1", {image2, id2})}}>
                         <Image
                                 style={styles.images}
                                 source={{
-                                    uri: `${album}`
+                                    uri: `${image2}`
                                 }}
                             />
                         <SafeAreaView style={styles.text}>

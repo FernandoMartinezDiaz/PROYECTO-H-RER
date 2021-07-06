@@ -45,7 +45,7 @@ const SearchResults = ({ route, navigation }) => {
         <Card containerStyle={styles.container}>
           <Card.Title style={styles.title}>RESULTS</Card.Title> 
           <Card.Title style={styles.subtitle}>Artist</Card.Title>
-          {artist && error ? <ActivityIndicator size="large" color=""/> : null }
+          {artist && error ? <ActivityIndicator size="large" color="#FF5B00"/> : null }
           {artist.map(artists => {
               return <ResultsArtist
               key={artists.artist.id} 
@@ -55,15 +55,17 @@ const SearchResults = ({ route, navigation }) => {
               id={artists.artist.id}/>;
 
             })}
+
           <Card.Title style={styles.subtitle}>Songs</Card.Title>
           {song.map(songs =>{
-
+            console.log(songs.track.key);
             return <ResultsSongs
             key={songs.track.key} 
             navigation={navigation} 
             name={songs.track.title} 
             artist={songs.track.subtitle}
-            album={songs.track.images.coverart}/>;
+            image2={songs.track.images.coverart}
+            id2={songs.track.key}/>;
           })}
         </Card>
       </ScrollView>

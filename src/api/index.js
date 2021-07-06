@@ -8,7 +8,7 @@ const instance = axios.create( {
   method: 'get',
   url: apiUrl ,
   headers: { 
-    'x-rapidapi-key': 'bd75fc219emsh004ef34b5ae8b6ep1f6e74jsnd294cdfa5b67', 
+    'x-rapidapi-key': '8375b723admsh443865d6bbe56c3p19caacjsnbcdac55c8c6a', 
     'x-rapidapi-host': 'shazam.p.rapidapi.com'
   }
 });

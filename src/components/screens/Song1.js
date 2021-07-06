@@ -6,16 +6,16 @@ import getEnvVars from "../../../Enviroment";
 
 const {apiUrl} = getEnvVars();
 
-const Song = ({route}) => {
+const Song1 = ({route}) => {
 
   const [song, setSong] = useState([]);
   const [album, setAlbum] = useState([]);
   const [genre, setGenre] = useState("");
-  const {image, id} = route.params
+  const {image2, id2} = route.params
 
     const getSong = async () => {
       try {
-        const respuesta = await index.get(`${apiUrl}songs/get-details?key=${id}&locale=en-US`);
+        const respuesta = await index.get(`${apiUrl}songs/get-details?key=${id2}&locale=en-US`);
         setSong(respuesta.data);
         setAlbum(respuesta.data.sections[0].metadata)
         setGenre(respuesta.data.genres.primary);
@@ -32,10 +32,10 @@ const Song = ({route}) => {
   return(
   <View style={styles.container}>
     <ImageBackground source={{
-          uri: `${image}`
+          uri: `${image2}`
           }} style={styles.background} blurRadius={15}>
           <Image source={{
-              uri: `${image}`
+              uri: `${image2}`
           }} style={styles.images}/>
       <Text style={styles.title}>{song.title}</Text>
       <Text style={styles.text}>{song.subtitle}</Text>
@@ -96,4 +96,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Song;
+export default Song1;
