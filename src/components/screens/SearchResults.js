@@ -12,8 +12,9 @@ import { ActivityIndicator } from "react-native-paper";
 const {apiUrl} = getEnvVars();
 
 const SearchResults = ({ route, navigation }) => {
+  //llamado de parametros de otra pagina/componente
   const {search} = route.params
-
+  //maneja el estado de las canciones mas estado de carga
   const [song, setSong] = useState([]);
   const [artist, setArtist] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,20 +24,21 @@ const SearchResults = ({ route, navigation }) => {
       try {
           //implementacion de api utilizando index.get para poder traer los datos desde nuestro index.js
         const respuesta = await index.get(`${apiUrl}search?term=${search}&locale=en-US&offset=0&limit=5`);
-          //utilizamos nuestro enviroment.js para poder instanciar nuestras variables de entrono 
-          //que estas conectadas a nuestra api.
+          //utilizamos nuestro enviroment.js para poder instanciar nuestras variables de entorno 
+          //que estan conectadas a nuestra api.
 
         
         setSong (respuesta.data.tracks.hits);
         //mapeo que nos ayudaran a encontrar los hists de nuestros artistas 
         setArtist(respuesta.data.artists.hits);
-        
         setLoading(false);
 
+        //error al momento de ejecutar la peticion a la api
       } catch (error) {
         console.log(error);  
       }
     } 
+    //Hook de efecto
     useEffect(()=>{
       getSearch();
     },[]);

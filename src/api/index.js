@@ -1,12 +1,12 @@
 //importacion de libreria axions ,necesitamos antes instalar su libreria para
-//poder importarlo y implementarlo
+//poder importarlo e implementarlo
 import axios from "axios";
 import getEnvVars from  "../../Enviroment"
 
 
 const { apiUrl } = getEnvVars();
 
-//Intancia de conexion
+//Instancia de conexion
 const instance = axios.create( {
   method: 'get',
   url: apiUrl ,

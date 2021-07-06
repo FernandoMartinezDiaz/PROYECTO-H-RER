@@ -10,24 +10,31 @@ const {apiUrl} = getEnvVars();
 
 const Song = ({route}) => {
 
+   //maneja el estado de los datos de las canciones mas estado de carga
   const [song, setSong] = useState([]);
   const [album, setAlbum] = useState([]);
   const [genre, setGenre] = useState("");
   const [loading, setLoading] = useState(true);
+  //llamado de parametros de otra pagina/componente
   const {image, id} = route.params
 
     const getSong = async () => {
       try {
+        //implementacion de api utilizando index.get para poder traer los datos desde nuestro index.js
         const respuesta = await index.get(`${apiUrl}songs/get-details?key=${id}&locale=en-US`);
+
+        //mapeo que nos ayudaran a encontrar los datos de la cancion
         setSong(respuesta.data);
         setAlbum(respuesta.data.sections[0].metadata);
         setGenre(respuesta.data.genres.primary);
         setLoading(false);
-
+        
+        //error al momento de ejecutar la peticion a la api
       } catch (error) {
         console.log(error);  
       }
     } 
+    //Hook de efecto
     useEffect(()=>{
       getSong();
     },[]);

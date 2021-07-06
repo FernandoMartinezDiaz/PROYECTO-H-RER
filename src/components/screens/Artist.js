@@ -11,24 +11,28 @@ const {apiUrl} = getEnvVars();
 
 
 const Artist = ({navigation, route}) => {
-  //maneja el estado de los productos
+  //manejo de estado de las canciones mas estado de carga
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(true);
   const {name, avatar, id} = route.params
 
     const getSongs = async () => {
       try {
-        
+         //implementacion de api utilizando index.get para poder traer los datos desde nuestro index.js
         const respuesta = await index.get(`${apiUrl}songs/list-artist-top-tracks?id=${id}&locale=en-US`);
+        //utilizamos nuestro enviroment.js para poder instanciar nuestras variables de entorno 
+        //que estan conectadas a nuestra api.
+
+        //mapeo que nos ayudaran a encontrar las canciones top de los artistas
         setSongs(respuesta.data.tracks);
         setLoading(false);
 
-  //error al momento de ejecutar la peticion a la api
+        //error al momento de ejecutar la peticion a la api
       } catch (error) {
         console.log(error);  
       }
     } 
-  //Hook de efecto
+    //Hook de efecto
     useEffect(()=>{
       getSongs();
     },[]);
