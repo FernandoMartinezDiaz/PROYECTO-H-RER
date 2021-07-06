@@ -2,6 +2,7 @@ import React,{ useState, useEffect} from "react";
 import { ImageBackground, StyleSheet, Text, SafeAreaView, ScrollView, Image} from "react-native";
 import Songs from '../Songs'
 import index from "../../api/index";
+import { ActivityIndicator } from "react-native-paper";
 
 import getEnvVars from "../../../Enviroment";
 import { Card } from 'react-native-elements'
@@ -10,6 +11,7 @@ const {apiUrl} = getEnvVars();
 
 const Artist = ({navigation, route}) => {
   const [songs, setSongs] = useState([]);
+  const [loading, setLoading] = useState(true);
   const {name, avatar, id} = route.params
 
     const getSongs = async () => {
@@ -17,7 +19,7 @@ const Artist = ({navigation, route}) => {
         
         const respuesta = await index.get(`${apiUrl}songs/list-artist-top-tracks?id=${id}&locale=en-US`);
         setSongs(respuesta.data.tracks);
-        console.log(respuesta.data.tracks);
+        setLoading(false);
 
       } catch (error) {
         console.log(error);  
@@ -39,17 +41,23 @@ const Artist = ({navigation, route}) => {
               <Text style={styles.text}>{name}</Text>
               <Card containerStyle={styles.card}>
                 <Card.Title style={styles.title}>TOP SONGS</Card.Title>
-                  {songs.map(songlist => {
+                {loading ? (
+                  <ActivityIndicator animating={loading} size="large" color="#FF5B00"/>
+                  ) : (
+                  <SafeAreaView>
+                    {songs.map(songlist => {
 
-                    return <Songs 
-                    navigation={navigation} 
-                    key={songlist.key} 
-                    title={songlist.title} 
-                    subtitle={songlist.subtitle} 
-                    image={songlist.images.coverart}
-                    id={songlist.key}/>
+                      return <Songs 
+                      navigation={navigation} 
+                      key={songlist.key} 
+                      title={songlist.title} 
+                      subtitle={songlist.subtitle} 
+                      image={songlist.images.coverart}
+                      id={songlist.key}/>
 
-                  })}
+                   })}
+                  </SafeAreaView>
+                )}
               </Card>
           </ImageBackground>
         </ScrollView>

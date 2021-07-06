@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from "react";
-import { ImageBackground, StyleSheet, Text, View, Image} from "react-native";
+import { ImageBackground, StyleSheet, Text, View, Image, SafeAreaView} from "react-native";
 import index from "../../api/index";
+import { ActivityIndicator } from "react-native-paper";
 
 import getEnvVars from "../../../Enviroment";
 
@@ -11,6 +12,7 @@ const Song1 = ({route}) => {
   const [song, setSong] = useState([]);
   const [album, setAlbum] = useState([]);
   const [genre, setGenre] = useState("");
+  const [loading, setLoading] = useState(true);
   const {image2, id2} = route.params
 
     const getSong = async () => {
@@ -19,7 +21,7 @@ const Song1 = ({route}) => {
         setSong(respuesta.data);
         setAlbum(respuesta.data.sections[0].metadata)
         setGenre(respuesta.data.genres.primary);
-        console.log(respuesta.data.sections[0].metadata)
+        setLoading(false);
 
       } catch (error) {
         console.log(error);  
@@ -31,20 +33,27 @@ const Song1 = ({route}) => {
 
   return(
   <View style={styles.container}>
-    <ImageBackground source={{
-          uri: `${image2}`
-          }} style={styles.background} blurRadius={15}>
-          <Image source={{
-              uri: `${image2}`
-          }} style={styles.images}/>
-      <Text style={styles.title}>{song.title}</Text>
-      <Text style={styles.text}>{song.subtitle}</Text>
-      {album.map(albums =>{
-        return <Text key={albums.title} style={styles.text}>{albums.text}</Text>
-      })}
-      <Text style={styles.text}>{genre}</Text>
-    </ImageBackground>
-  </View>
+      <ImageBackground source={{
+            uri: `${image2}`
+            }} style={styles.background} blurRadius={15}>
+            <Image source={{
+                uri: `${image2}`
+            }} style={styles.images}/>
+      {loading ? (
+          <ActivityIndicator animating={loading} size="large" color="#FF5B00"/>
+        ) : (
+          <SafeAreaView>
+            <Text style={styles.title}>{song.title}</Text>
+            <Text style={styles.text}>{song.subtitle}</Text>
+            {album.map(albums =>{
+              return <Text key={albums.title} style={styles.text}>{albums.text}</Text>
+            })}
+            <Text style={styles.text}>{genre}</Text>
+          </SafeAreaView>
+        )}
+        
+      </ImageBackground>
+    </View>
   )
 };
 
@@ -84,7 +93,7 @@ const styles = StyleSheet.create({
     alignSelf:"center",
     width:200,
     height:200,
-    marginBottom: 50,
+    marginBottom: 30,
     borderWidth: 2,
     borderColor: "#FF5B00"
   },

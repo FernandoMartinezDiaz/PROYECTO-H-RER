@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from "react";
-import { ImageBackground, StyleSheet, Text, View, Image} from "react-native";
+import { ImageBackground, StyleSheet, Text, View, Image, SafeAreaView} from "react-native";
 import index from "../../api/index";
+import { ActivityIndicator } from "react-native-paper";
 
 import getEnvVars from "../../../Enviroment";
 
@@ -11,15 +12,16 @@ const Song = ({route}) => {
   const [song, setSong] = useState([]);
   const [album, setAlbum] = useState([]);
   const [genre, setGenre] = useState("");
+  const [loading, setLoading] = useState(true);
   const {image, id} = route.params
 
     const getSong = async () => {
       try {
         const respuesta = await index.get(`${apiUrl}songs/get-details?key=${id}&locale=en-US`);
         setSong(respuesta.data);
-        setAlbum(respuesta.data.sections[0].metadata)
+        setAlbum(respuesta.data.sections[0].metadata);
         setGenre(respuesta.data.genres.primary);
-        console.log(respuesta.data.sections[0].metadata)
+        setLoading(false);
 
       } catch (error) {
         console.log(error);  
@@ -37,12 +39,19 @@ const Song = ({route}) => {
           <Image source={{
               uri: `${image}`
           }} style={styles.images}/>
-      <Text style={styles.title}>{song.title}</Text>
-      <Text style={styles.text}>{song.subtitle}</Text>
-      {album.map(albums =>{
-        return <Text key={albums.title} style={styles.text}>{albums.text}</Text>
-      })}
-      <Text style={styles.text}>{genre}</Text>
+    {loading ? (
+        <ActivityIndicator animating={loading} size="large" color="#FF5B00"/>
+      ) : (
+        <SafeAreaView>
+          <Text style={styles.title}>{song.title}</Text>
+          <Text style={styles.text}>{song.subtitle}</Text>
+          {album.map(albums =>{
+            return <Text key={albums.title} style={styles.text}>{albums.text}</Text>
+          })}
+          <Text style={styles.text}>{genre}</Text>
+        </SafeAreaView>
+      )}
+      
     </ImageBackground>
   </View>
   )
@@ -84,16 +93,10 @@ const styles = StyleSheet.create({
     alignSelf:"center",
     width:200,
     height:200,
-    marginBottom: 50,
+    marginBottom: 30,
     borderWidth: 2,
     borderColor: "#FF5B00"
   },
-  backbutton: {
-    width:30,
-    height:30,
-    backgroundColor: "transparent",
-    marginLeft: 10,
-  }
 });
 
 export default Song;

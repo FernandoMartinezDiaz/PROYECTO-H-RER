@@ -6,7 +6,7 @@ import getEnvVars from "../../../Enviroment";
 import ResultsArtist from "../ResultsArtist";
 import ResultsSongs from "../ResultsSongs";
 import Search from "../Search";
-import { ActivityIndicator, Title } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 
 const {apiUrl} = getEnvVars();
 
@@ -43,27 +43,38 @@ const SearchResults = ({ route, navigation }) => {
         <Card containerStyle={styles.container}>
           <Card.Title style={styles.title}>RESULTS</Card.Title> 
           <Card.Title style={styles.subtitle}>Artist</Card.Title>
-          {artist.map(artists => {
-              return <ResultsArtist
-              key={artists.artist.id} 
-              navigation={navigation} 
-              name={artists.artist.name} 
-              avatar={artists.artist.avatar}
-              id={artists.artist.id}/>;
-
-            })}
+          {loading ? (
+            <ActivityIndicator animating={loading} size="large" color="#FF5B00" />
+            ) : (
+             <SafeAreaView>
+              {artist.map(artists => {
+                return <ResultsArtist
+                key={artists.artist.id} 
+                navigation={navigation} 
+                name={artists.artist.name} 
+                avatar={artists.artist.avatar}
+                id={artists.artist.id}/>;
+  
+              })}
+            </SafeAreaView>
+          )}
 
           <Card.Title style={styles.subtitle}>Songs</Card.Title>
-          {song.map(songs =>{
-            console.log(songs.track.key);
-            return <ResultsSongs
-            key={songs.track.key} 
-            navigation={navigation} 
-            name={songs.track.title} 
-            artist={songs.track.subtitle}
-            image2={songs.track.images.coverart}
-            id2={songs.track.key}/>;
-          })}
+          {loading ? (
+            <ActivityIndicator animating={loading} size="large" color="#FF5B00" />
+            ) : (
+              <SafeAreaView>
+                {song.map(songs =>{
+                  return <ResultsSongs
+                  key={songs.track.key} 
+                  navigation={navigation} 
+                  name={songs.track.title} 
+                  artist={songs.track.subtitle}
+                  image2={songs.track.images.coverart}
+                  id2={songs.track.key}/>;
+                })}
+              </SafeAreaView>
+            )}
         </Card>
       </ScrollView>
     </SafeAreaView>
