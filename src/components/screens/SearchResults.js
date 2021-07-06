@@ -1,3 +1,4 @@
+//Importacion de modulos necesarios
 import React, { useState, useEffect} from "react";
 import { StyleSheet,ScrollView, SafeAreaView} from "react-native";
 import { Card } from 'react-native-elements'
@@ -20,12 +21,16 @@ const SearchResults = ({ route, navigation }) => {
     const getSearch = async () => {
       
       try {
-
+          //implementacion de api utilizando index.get para poder traer los datos desde nuestro index.js
         const respuesta = await index.get(`${apiUrl}search?term=${search}&locale=en-US&offset=0&limit=5`);
+          //utilizamos nuestro enviroment.js para poder instanciar nuestras variables de entrono 
+          //que estas conectadas a nuestra api.
 
-
+        
         setSong (respuesta.data.tracks.hits);
+        //mapeo que nos ayudaran a encontrar los hists de nuestros artistas 
         setArtist(respuesta.data.artists.hits);
+        
         setLoading(false);
 
       } catch (error) {
@@ -81,7 +86,8 @@ const SearchResults = ({ route, navigation }) => {
   );
 };
 
-
+//Llamamos los estilos para nuestra aplicacion donde vamos a llamar todo lo necesario 
+//para nuestros diseños.
 const styles = StyleSheet.create({
     container: {
         flex: 1,

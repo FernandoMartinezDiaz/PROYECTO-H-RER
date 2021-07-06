@@ -1,3 +1,4 @@
+//Importacion de modulos necesarios
 import React, { useState, useEffect} from "react";
 import { ImageBackground, StyleSheet, Text, View, Image, SafeAreaView} from "react-native";
 import index from "../../api/index";
@@ -57,6 +58,8 @@ const Song = ({route}) => {
   )
 };
 
+//Llamamos los estilos para nuestra aplicacion donde vamos a llamar todo lo necesario 
+//para nuestros diseños.
 const styles = StyleSheet.create({
   container: {
     flex: 1,

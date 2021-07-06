@@ -1,5 +1,8 @@
+//importacion y instalacion expo constants 
 import Constants from "expo-constants";
 
+//implementacion de nuestras variables de entorno para al momento de 
+//llamar nuestra variable en nuestra api sea mas facil implementarla y utilizarla
 const ENV = {
     dev: {
         apiUrl: "https://shazam.p.rapidapi.com/",

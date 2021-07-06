@@ -1,15 +1,17 @@
+//Importacion de modulos necesarios
 import React,{ useState, useEffect} from "react";
 import { ImageBackground, StyleSheet, Text, SafeAreaView, ScrollView, Image} from "react-native";
 import Songs from '../Songs'
 import index from "../../api/index";
 import { ActivityIndicator } from "react-native-paper";
-
 import getEnvVars from "../../../Enviroment";
 import { Card } from 'react-native-elements'
 
 const {apiUrl} = getEnvVars();
 
+
 const Artist = ({navigation, route}) => {
+  //maneja el estado de los productos
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(true);
   const {name, avatar, id} = route.params
@@ -21,14 +23,17 @@ const Artist = ({navigation, route}) => {
         setSongs(respuesta.data.tracks);
         setLoading(false);
 
+  //error al momento de ejecutar la peticion a la api
       } catch (error) {
         console.log(error);  
       }
     } 
+  //Hook de efecto
     useEffect(()=>{
       getSongs();
     },[]);
 
+    
     return(
       <SafeAreaView style={styles.container}>
         <ScrollView>
@@ -66,6 +71,8 @@ const Artist = ({navigation, route}) => {
     )
 }
 
+//Llamamos los estilos para nuestra aplicacion donde vamos a llamar todo lo necesario 
+//para nuestros diseños.
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -102,5 +109,7 @@ const styles = StyleSheet.create({
     backgroundColor:"transparent"
   }
 });
+
+//exportacion de nuestra pantalla 
 
 export default Artist;

@@ -1,3 +1,4 @@
+//Importacion de modulos necesarios
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Searchbar } from "react-native-paper";
@@ -16,6 +17,9 @@ const Search = ({ navigation }) => {
     </View>
   );
 };
+
+//Llamamos los estilos para nuestra aplicacion donde vamos a llamar todo lo necesario 
+//para nuestros diseños.
 
 const styles = StyleSheet.create({
   container: {

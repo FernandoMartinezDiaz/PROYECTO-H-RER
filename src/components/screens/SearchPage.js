@@ -1,3 +1,4 @@
+//Importacion de modulos necesarios
 import React from "react";
 import { StyleSheet, SafeAreaView, Text, View} from "react-native";
 import { Card } from "react-native-elements";
@@ -21,7 +22,8 @@ const SearchPage = ({  navigation }) => {
   );
 };
 
-
+//Llamamos los estilos para nuestra aplicacion donde vamos a llamar todo lo necesario 
+//para nuestros diseños.
 const styles = StyleSheet.create({
     container: {
         flex: 1,

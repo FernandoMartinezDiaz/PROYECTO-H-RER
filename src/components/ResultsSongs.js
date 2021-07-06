@@ -1,3 +1,4 @@
+//Importacion de modulos necesarios
 import React from "react";
 import { Text, Image, StyleSheet, SafeAreaView} from 'react-native'
 import { Card } from 'react-native-elements'
@@ -22,6 +23,10 @@ const ResultsSongs = ({navigation, name, artist, image2, id2}) =>{
         </SafeAreaView>
     )
 }
+
+
+//Llamamos los estilos para nuestra aplicacion donde vamos a llamar todo lo necesario 
+//para nuestros diseños.
 
 const styles = StyleSheet.create({
     user:{

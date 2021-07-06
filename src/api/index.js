@@ -1,5 +1,8 @@
+//importacion de libreria axions ,necesitamos antes instalar su libreria para
+//poder importarlo y implementarlo
 import axios from "axios";
 import getEnvVars from  "../../Enviroment"
+
 
 const { apiUrl } = getEnvVars();
 

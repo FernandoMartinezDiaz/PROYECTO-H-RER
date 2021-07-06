@@ -1,6 +1,8 @@
+//Importacion de modulos necesarios
 import React from "react";
 import { ImageBackground, StyleSheet, Text, View, TouchableOpacity, Image} from "react-native";
 
+//
 const Home = ({ navigation }) => (
   <View style={styles.container}>
     <ImageBackground source={require('../screens/resources/background.jpg')} style={styles.background}>
@@ -17,6 +19,8 @@ const Home = ({ navigation }) => (
   </View>
 );
 
+//Llamamos los estilos para nuestra aplicacion donde vamos a llamar todo lo necesario 
+//para nuestros diseños.
 const styles = StyleSheet.create({
   container: {
     flex: 1,
