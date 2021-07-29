@@ -6,13 +6,34 @@ import { firebase } from "../firebase"
 const authReducer = (state, action) =>{
     switch (action.type){
         case "signup":
-
+            return {
+              ...state,
+              user: action.payload.user,
+              registered: action.payload.registered,
+            };
+          case "errorMessage":
+            return { ...state, errorMessage: action.payload };
+          case "signin":
+            return {
+              ...state,
+              user: action.payload.user,
+              loggedIn: action.payload.loggedIn,
+            };
+          case "persistLogin":
+            return {
+              ...state,
+              user: action.payload.user,
+              loggedIn: action.payload.loggedIn,
+              loading: action.payload.loading,
+            };
+          case "signout":
+            return {
+              ...state,
+              user: action.payload.user,
+              loggedIn: action.payload.loggedIn,
+            };
+          default:
             return state;
-
-        default:
-
-            return state;
-    }
 };
 
 //Funciones

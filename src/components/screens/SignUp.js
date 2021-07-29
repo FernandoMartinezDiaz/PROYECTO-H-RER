@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import SingupForm from "../forms/SignupForm";
+ import {TextInput} from "react-native-paper"
+
+
 
 function SignUp({navigation}){
+
     return(
         <View style={styles.container}>
             <Text>Register</Text>

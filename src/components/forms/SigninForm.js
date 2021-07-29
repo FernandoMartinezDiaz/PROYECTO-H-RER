@@ -7,6 +7,7 @@ function SinginForm(){
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+    //import { Context as AuthContext } from "../../providers/AuthContext";
 
     function handleVerify(input){
         if(input == "email"){
@@ -15,6 +16,10 @@ function SinginForm(){
         }else if(input == "password"){
             if(!password) setPasswordError(true);
             else setPasswordError(false);
+        }else if (input === "signin") {
+            if (email && password && !emailError && !passwordError) {
+              signin(email, password);
+            }
         }
     }
 
