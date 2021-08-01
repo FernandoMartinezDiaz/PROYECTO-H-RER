@@ -2,7 +2,9 @@
 //poder importarlo e implementarlo
 import axios from "axios";
 import getEnvVars from  "../../Enviroment"
-
+import firebase from "firebase/app";
+import "@firebase/auth";
+import "@firebase/firestore";
 
 const { apiUrl } = getEnvVars();
 
@@ -19,6 +21,8 @@ const instance = axios.create( {
 //.then(function (response) {
  // console.log(JSON.stringify(response.data));
 //})
+
+//verificar
 
 
 export default instance;

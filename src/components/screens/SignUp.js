@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, Image } from
 import SingupForm from "../forms/SignupForm";
 
 function SignUp({navigation}){
+
     return(
         <View style={styles.container}>
         <ImageBackground source={require('../screens/resources/background.gif')} style={styles.background}>
