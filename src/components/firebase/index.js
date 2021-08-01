@@ -26,26 +26,4 @@ const firebaseConfig ={
 
 if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 
-return (
-    <NavigationContainer>
-      {!state.loading && (
-        <>
-          {state.loggedIn ? (
-            <Stack.Navigator>
-              <Stack.Screen name="Home" component={Home} />
-              <Stack.Screen name="CreateProject" component={CreateProject} />
-              <Stack.Screen name="AddTask" component={AddTask} />
-            </Stack.Navigator>
-          ) : (
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="Signin" component={Signin} />
-              <Stack.Screen name="Signup" component={Signup} />
-            </Stack.Navigator>
-          )}
-        </>
-      )}
-    </NavigationContainer>
-  );
-}
-
 export{ firebase };
