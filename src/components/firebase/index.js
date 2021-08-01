@@ -1,17 +1,18 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore"
 import getEnvVars from "../../../Enviroment";
 
 const{
     apiKey,
-    authDomain,projectId,
+    authDomain,
+    projectId,
     storageBucket,
     messagingSenderId,
     appId
 } = getEnvVars();
 
-//Pasar los vavlores de las keys a Firebase
+//Pasar los valores de las keys a Firebase
 
 const firebaseConfig ={
     apiKey,
@@ -23,6 +24,6 @@ const firebaseConfig ={
 
 //Iniciar la conexion a firebase si no se ha realizado previamente
 
-if(!firebase.app.length) firebase.initializeApp(firebaseConfig);
+if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 
 export{ firebase };

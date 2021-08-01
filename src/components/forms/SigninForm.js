@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, Caption, TextInput } from 'react-native-paper';
+import { Button, Caption, TextInput, Text } from 'react-native-paper';
+import { Context as AuthContext} from "../providers/AuthContext"
 
 function SinginForm(){
+    const {state, signin} = useContext(AuthContext);
     const [email,  setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+    const [error, setError] = useState(false);
 
     function handleVerify(input){
         if(input == "email"){
@@ -15,11 +18,16 @@ function SinginForm(){
         }else if(input == "password"){
             if(!password) setPasswordError(true);
             else setPasswordError(false);
+        }else if(input == "signin"){
+            if(email && password && !emailError && !passwordError){
+                signin(email, password);
+            }
         }
     }
 
     return(
-        <View>
+        <View style={styles.padding}>
+            {state.errorMessage !== null && <Text style={styles.captions}>{state.errorMessage}</Text>}
             <TextInput 
             mode="outlined" 
             label="Email" 
@@ -45,14 +53,20 @@ function SinginForm(){
 
             {passwordError && (<Caption style={styles.captions}>Please enter your password</Caption>)}
 
-            <Button mode="contained">Sign In</Button>
+            <Button mode="contained" onPress={() =>handleVerify("signin")} style={styles.button}>Sign In</Button>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     captions:{
-        color:"white"
+        color:"white",
+    },
+    padding:{
+        padding:15,
+    },
+    button:{
+        marginTop:10
     }
 });
 

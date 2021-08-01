@@ -1,6 +1,6 @@
 //Importacion de modulos necesarios
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View, TouchableOpacity, Image} from "react-native";
+import { ImageBackground, StyleSheet, Text, View, Image} from "react-native";
 
 //
 const Home = ({ navigation }) => (
@@ -9,12 +9,6 @@ const Home = ({ navigation }) => (
       <Text style={styles.text}>Welcome to</Text>
       <Image style={styles.images} source={require('../screens/resources/logo.png')} />
       <Text style={styles.text}>Hörer</Text>
-        <TouchableOpacity
-        style={styles.button} 
-        navigation={navigation}
-        onPress={()=>{navigation.navigate("SearchPage")}}>
-          <Image source={require("../screens/resources/search_icon.png")} style={styles.icon} />
-        </TouchableOpacity>
     </ImageBackground>
   </View>
 );
