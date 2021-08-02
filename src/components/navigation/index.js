@@ -43,6 +43,17 @@ function HomeStackScreen() {
   );
 }
 
+const UserStack = createStackNavigator();
+
+function UserStackScreen() {
+  return (
+    <UserStack.Navigator>
+      <UserStack.Screen name="User" component={User}/>
+      <UserStack.Screen name="Song" component={Song} />
+    </UserStack.Navigator>
+  );
+}
+
   return (
     <NavigationContainer theme={DarkTheme}>
       {!state.loading && (
@@ -72,7 +83,7 @@ function HomeStackScreen() {
           }}>
             <Tab.Screen options={{headerShown: false}} name="Home" component={Home} />
             <Tab.Screen name="SearchPage" component={HomeStackScreen}/>
-            <Tab.Screen name="User" component={User}/>
+            <Tab.Screen name="User" component={UserStackScreen}/>
           </Tab.Navigator>
           ) : (
             <Stack.Navigator>

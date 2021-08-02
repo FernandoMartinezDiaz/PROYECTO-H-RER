@@ -1,10 +1,24 @@
 //Importacion de modulos necesarios
-import React from "react";
+import React, {useContext, useState} from "react";
 import { Text, Image, StyleSheet, SafeAreaView} from 'react-native'
 import { Card } from 'react-native-elements'
 import { TouchableOpacity } from "react-native";
+import { IconButton } from "react-native-paper";
+import {Context as FavoriteContext} from "./providers/FavoriteContext"
+import {Context as AuthContext} from './providers/AuthContext'
    
 const ResultsSongs = ({navigation, name, artist, image2, id2}) =>{
+    const { createFavorite } = useContext(FavoriteContext);
+    const {state} = useContext(AuthContext);
+    
+
+    function handleSave(){
+        if(id2){
+            createFavorite(id2, image2, name, artist, state.user.id)
+        }
+    }
+
+
     return(
         <SafeAreaView>
             <TouchableOpacity style={styles.user} onPress={()=>{navigation.navigate("Song1", {image2, id2})}}>
@@ -17,6 +31,9 @@ const ResultsSongs = ({navigation, name, artist, image2, id2}) =>{
                         <SafeAreaView style={styles.text}>
                             <Text style={styles.song}>{name}</Text>
                             <Text style={styles.name}>{artist}</Text>
+                        </SafeAreaView>
+                        <SafeAreaView>
+                            <IconButton icon="star" size={20} color="#FF5B00" onPress={() => handleSave()}/> 
                         </SafeAreaView>
                 </TouchableOpacity>
                 <Card.Divider color="transparent"/>

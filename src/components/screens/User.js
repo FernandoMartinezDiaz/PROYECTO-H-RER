@@ -1,4 +1,4 @@
-import React,{ useState, useEffect, useContext} from "react";
+import React,{ useEffect, useContext} from "react";
 import { ImageBackground, StyleSheet, Text, SafeAreaView, ScrollView, Image} from "react-native";
 import Songs from '../Songs'
 import index from "../../api/index";
@@ -6,38 +6,21 @@ import { ActivityIndicator } from "react-native-paper";
 import getEnvVars from "../../../Enviroment";
 import { Card } from 'react-native-elements'
 import { Button } from "react-native-paper";
-import { Context as AuthContext} from '../providers/AuthContext'
+import { Context as AuthContext} from '../providers/AuthContext';
+import { Context as FavoriteContext} from '../providers/FavoriteContext';
+import FavoriteList from "../shared/FavoriteList";
 
 const {apiUrl} = getEnvVars();
 
 
-const User = ({navigation, route}) => {
+const User = ({navigation}) => {
   //manejo de estado de las canciones mas estado de carga
-  const [songs, setSongs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const {signout} = useContext(AuthContext);
+  const { state, signout} = useContext(AuthContext);
+  const { state: favoriteState, getFavorites} = useContext(FavoriteContext);
 
-    const getSongs = async () => {
-      try {
-         //implementacion de api utilizando index.get para poder traer los datos desde nuestro index.js
-        const respuesta = await index.get(`${apiUrl}songs/list-artist-top-tracks?id=${id}&locale=en-US`);
-        //utilizamos nuestro enviroment.js para poder instanciar nuestras variables de entorno 
-        //que estan conectadas a nuestra api.
-
-        //mapeo que nos ayudaran a encontrar las canciones top de los artistas
-        setSongs(respuesta.data.tracks);
-        setLoading(false);
-
-        //error al momento de ejecutar la peticion a la api
-      } catch (error) {
-        console.log(error);  
-      }
-    } 
-    //Hook de efecto
-    useEffect(()=>{
-      getSongs();
-    },[]);
-
+  useEffect(() =>{
+    getFavorites(state.user.id);
+  }, []);
     
     return(
       <SafeAreaView style={styles.container}>
@@ -46,6 +29,10 @@ const User = ({navigation, route}) => {
               <Image style={styles.images} source={require("./resources/temp_pfp.jpeg")} />
               <Text style={styles.text}>Patrick Midence</Text>
               <Button onPress={signout}>Sign Out</Button>
+              <Card containerStyle={styles.card}>
+                <Card.Title style={styles.title}>FAVORITES</Card.Title>
+                  <FavoriteList favorites={favoriteState.favorites} navigation={navigation}/>
+              </Card>
           </ImageBackground>
         </ScrollView>
       </SafeAreaView>
@@ -88,7 +75,7 @@ const styles = StyleSheet.create({
     color: "#FF5B00",
   },
   card:{
-    backgroundColor:"transparent"
+    backgroundColor:"transparent",
   }
 });
 

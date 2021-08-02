@@ -1,19 +1,17 @@
 //Importacion de modulos necesarios
 import React, {useContext} from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native'
+import { Text, Image, StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native'
 import { Card } from 'react-native-elements'
 import { IconButton } from "react-native-paper";
-import {Context as FavoriteContext} from "./providers/FavoriteContext"
-import {Context as AuthContext} from './providers/AuthContext'
+import {Context as FavoriteContext} from "../providers/FavoriteContext"
    
 
 const Songs = ({ navigation, title, subtitle, image, id}) =>{
-    const { createFavorite } = useContext(FavoriteContext);
-    const {state} = useContext(AuthContext);
-    
-    function handleSave(){
+    const { deleteFavorites } = useContext(FavoriteContext);
+
+    function handleDelete(){
         if(id){
-            createFavorite(id, image, title, subtitle, state.user.id)
+            deleteFavorites(id)
         }
     }
 
@@ -31,7 +29,7 @@ const Songs = ({ navigation, title, subtitle, image, id}) =>{
                             <Text  style={styles.name}>{subtitle}</Text>
                         </SafeAreaView>
                         <SafeAreaView>
-                            <IconButton icon="star" size={20} color="#FF5B00" onPress={() => handleSave()}/> 
+                            <IconButton icon="md-trash" size={20} color="#FF5B00" onPress={() => handleDelete()}/> 
                         </SafeAreaView>
             </TouchableOpacity>
             <Card.Divider color= "transparent" />
