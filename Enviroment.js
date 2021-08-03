@@ -13,7 +13,16 @@ const ENV = {
         messagingSenderId: "422681652198",
         appId: "1:422681652198:web:48a61ff77b5c8d97c10427"
         },
-    production:{
+    staging: {
+        apiUrl: "https://shazam.p.rapidapi.com/",
+        apiKey: "AIzaSyBzUVZbgmG88MaFCgx_X6Kc2sVOuKUfjTo",
+        authDomain: "proyecto-horer.firebaseapp.com",
+        projectId: "proyecto-horer",
+        storageBucket: "proyecto-horer.appspot.com",
+        messagingSenderId: "422681652198",
+        appId: "1:422681652198:web:48a61ff77b5c8d97c10427"
+        },
+    production: {
         apiUrl: "https://shazam.p.rapidapi.com/",
         apiKey: "AIzaSyBzUVZbgmG88MaFCgx_X6Kc2sVOuKUfjTo",
         authDomain: "proyecto-horer.firebaseapp.com",
