@@ -2,16 +2,16 @@
 import React, {useContext} from 'react';
 import { Text, Image, StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native'
 import { Card } from 'react-native-elements'
-import { IconButton } from "react-native-paper";
+import { Entypo } from '@expo/vector-icons'; 
 import {Context as FavoriteContext} from "../providers/FavoriteContext"
    
 
-const Songs = ({ navigation, title, subtitle, image, id}) =>{
+const Songs = ({ navigation, title, subtitle, image, id, uid}) =>{
     const { deleteFavorites } = useContext(FavoriteContext);
 
     function handleDelete(){
-        if(id){
-            deleteFavorites(id)
+        if(uid){
+            deleteFavorites(uid);
         }
     }
 
@@ -29,7 +29,7 @@ const Songs = ({ navigation, title, subtitle, image, id}) =>{
                             <Text  style={styles.name}>{subtitle}</Text>
                         </SafeAreaView>
                         <SafeAreaView>
-                            <IconButton icon="md-trash" size={20} color="#FF5B00" onPress={() => handleDelete()}/> 
+                            <Entypo name="trash" size={20} color="#FF5B00" onPress={() => handleDelete()} />
                         </SafeAreaView>
             </TouchableOpacity>
             <Card.Divider color= "transparent" />

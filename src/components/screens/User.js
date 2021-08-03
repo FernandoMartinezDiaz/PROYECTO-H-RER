@@ -1,16 +1,12 @@
-import React,{ useEffect, useContext} from "react";
-import { ImageBackground, StyleSheet, Text, SafeAreaView, ScrollView, Image} from "react-native";
-import Songs from '../Songs'
-import index from "../../api/index";
-import { ActivityIndicator } from "react-native-paper";
-import getEnvVars from "../../../Enviroment";
+import React,{ useEffect, useState, useContext} from "react";
+import { StyleSheet, Text, SafeAreaView, ScrollView, Image, ActivityIndicator} from "react-native";
 import { Card } from 'react-native-elements'
+import { color } from "react-native-elements/dist/helpers";
 import { Button } from "react-native-paper";
 import { Context as AuthContext} from '../providers/AuthContext';
 import { Context as FavoriteContext} from '../providers/FavoriteContext';
 import FavoriteList from "../shared/FavoriteList";
 
-const {apiUrl} = getEnvVars();
 
 
 const User = ({navigation}) => {
@@ -25,15 +21,13 @@ const User = ({navigation}) => {
     return(
       <SafeAreaView style={styles.container}>
         <ScrollView>
-          <ImageBackground source={require("./resources/temp_pfp.jpeg")} style={styles.background} blurRadius={15}>
-              <Image style={styles.images} source={require("./resources/temp_pfp.jpeg")} />
-              <Text style={styles.text}>Patrick Midence</Text>
-              <Button onPress={signout}>Sign Out</Button>
+              <Image style={styles.images} source={require("./resources/user-logo.png")} />
+              <Text style={styles.text}>{state.user.fullname}</Text>
+              <Button onPress={signout} style={styles.button}>Sign Out</Button>
               <Card containerStyle={styles.card}>
                 <Card.Title style={styles.title}>FAVORITES</Card.Title>
-                  <FavoriteList favorites={favoriteState.favorites} navigation={navigation}/>
+                    <FavoriteList favorites={favoriteState.favorites} navigation={navigation}/>
               </Card>
-          </ImageBackground>
         </ScrollView>
       </SafeAreaView>
 
@@ -46,7 +40,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: 'rgba(0,0,0, 1)',
+    backgroundColor: '#202121',
   },
   background: {
     resizeMode: "cover",
@@ -58,11 +52,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "normal",
     textAlign: "center",
-    paddingTop: 5,
   },
   images:{
     alignSelf:"center",
     margin: 25,
+    marginTop: 25,
     width:170,
     height:170,
     borderRadius:100,
@@ -71,11 +65,19 @@ const styles = StyleSheet.create({
   },
   title:{
     textAlign:"left",
+    fontFamily:"Roboto",
+    fontWeight:"bold",
     fontSize: 20,
     color: "#FF5B00",
   },
   card:{
     backgroundColor:"transparent",
+  },
+  button:{
+    width: 200,
+    alignSelf: "center",
+    marginTop: 15,
+    backgroundColor:"#000000",
   }
 });
 

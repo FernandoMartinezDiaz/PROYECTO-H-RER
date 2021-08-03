@@ -8,7 +8,7 @@ function FavoriteList({ favorites, navigation }) {
 
     const emptyFlatList = (
         <View style={styles.emptyFavorites}>
-          <Text>You don't have any favorites yet...</Text>
+          <Text style={styles.text}>You don't have any favorites yet...</Text>
         </View>
       );
 
@@ -21,8 +21,10 @@ function FavoriteList({ favorites, navigation }) {
         renderItem={({ item }) => (
           <>
             <Favorites 
-            navigation={navigation} 
-            id={item.key} title={item.title} 
+            navigation={navigation}
+            uid={item.id}
+            id={item.key} 
+            title={item.title} 
             subtitle={item.subtitle} 
             image={item.coverart}/>
           </>
@@ -42,6 +44,9 @@ const styles = StyleSheet.create({
       justifyContent: "center",
       alignSelf: "center",
     },
+    text:{
+      color: "white"
+    }
   });
 
   export default FavoriteList;

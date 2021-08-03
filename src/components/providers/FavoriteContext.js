@@ -24,6 +24,7 @@ const favoriteRef = firebase.firestore().collection("songs");
 
 //Almacenar la informacion de la cancion
 const createFavorite = (dispatch) => (key, coverart, title, subtitle, user) =>{
+
     const data = {
         key,
         coverart,
@@ -58,9 +59,9 @@ const getFavorites = (dispatch) => (userID) =>{
 
 }
 
-const deleteFavorites = (dispatch) =>(key) =>{
+const deleteFavorites = (dispatch) =>(id) =>{
     favoriteRef
-    .doc(key)
+    .doc(id)
     .delete()
     .then(() =>
         dispatch({type: "errorMessage", payload: "Favorite has been deleted!"})
